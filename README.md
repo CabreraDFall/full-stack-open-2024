@@ -1,6 +1,12 @@
+# [Full Stack Open](https://fullstackopen.com/en/)
+
+Mastering React, Redux, Node.js, MongoDB, GraphQL, and TypeScript all at once! This comprehensive course offers a deep dive into modern JavaScript-based web development. You'll focus on creating single-page applications with React and REST APIs using Node.js.
+
+This course is proudly offered by the Department of Computer Science at the University of Helsinki.
+
 ## Curriculum
 
-- [x] Part 0: Fundamentals of Web apps
+- [x] Part 0: Fundamentals of Web apps: 6/6 (./part0)
 - [ ] Part 1: Introduction to React
 - [ ] Part 2: Communicating with Server
 - [ ] Part 3: Programming a server with NodeJS and Express
