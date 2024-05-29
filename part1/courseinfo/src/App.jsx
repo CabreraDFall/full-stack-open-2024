@@ -31,7 +31,7 @@ const Part = ({ part, exercise }) => {
   );
 };
 
-//Part 1.1 - 1.2
+//Part 1.1 - 1.5
 const App = () => {
   const course = {
     name: "Half Stack application development",
