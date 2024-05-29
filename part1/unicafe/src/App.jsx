@@ -12,6 +12,19 @@ const Statistics = ({ text, counter }) => {
   );
 };
 
+const Score = ({ comments }) => {
+  const sumScore = comments?.reduce((acc, comment) => acc + comment.counter, 0);
+  const average = (comments[0].counter - comments[2].counter) / sumScore;
+  const positiveComment = comments[0].counter / sumScore;
+  return (
+    <>
+      <p>all {sumScore}</p>
+      <p>average {average}</p>
+      <p>positive {positiveComment} %</p>
+    </>
+  );
+};
+
 const App = () => {
   // guarda los clics de cada botón en su propio estado
 
@@ -43,6 +56,7 @@ const App = () => {
         {buttonInfo?.map((button, index) => (
           <Statistics key={index} text={button.name} counter={button.counter} />
         ))}
+        <Score comments={buttonInfo} />
       </div>
     </div>
   );
