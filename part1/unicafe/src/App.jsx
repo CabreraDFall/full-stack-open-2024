@@ -15,7 +15,7 @@ const Statistics = ({ text, counter }) => {
 const Score = ({ comments }) => {
   const sumScore = comments?.reduce((acc, comment) => acc + comment.counter, 0);
   const average = (comments[0].counter - comments[2].counter) / sumScore;
-  const positiveComment = comments[0].counter / sumScore;
+  const positiveComment = (comments[0].counter / sumScore) * 100;
   return (
     <>
       <p>all {sumScore}</p>
