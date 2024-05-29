@@ -1,3 +1,4 @@
+// Part 1.1
 const Header = ({ name }) => {
   return (
     <div>
@@ -6,12 +7,11 @@ const Header = ({ name }) => {
   );
 };
 const Content = ({ parts }) => {
-  const listItems = parts?.map((part, index) => (
-    <p key={index}>
-      {part.name} {part.exercises}
-    </p>
+  const partLoop = parts?.map((part, index) => (
+    <Part key={index} part={part.name} exercise={part.exercises} />
   ));
-  return <div>{listItems}</div>;
+
+  return <>{partLoop}</>;
 };
 
 const Total = ({ duration }) => {
@@ -22,6 +22,16 @@ const Total = ({ duration }) => {
   return <p>Number of exercises {sumWithInitial}</p>;
 };
 
+// Part 1.2
+const Part = ({ part, exercise }) => {
+  return (
+    <p>
+      {part} {exercise}
+    </p>
+  );
+};
+
+//Part 1.1 - 1.2
 const App = () => {
   const course = {
     name: "Half Stack application development",
