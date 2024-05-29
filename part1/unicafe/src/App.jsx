@@ -45,19 +45,27 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-
       <div>
         {buttonInfo.map((button, index) => (
           <Button key={index} counter={button.handleClick} text={button.name} />
         ))}
       </div>
-
-      <div>
-        {buttonInfo?.map((button, index) => (
-          <Statistics key={index} text={button.name} counter={button.counter} />
-        ))}
-        <Score comments={buttonInfo} />
-      </div>
+      {buttonInfo[0].counter === 0 &&
+      buttonInfo[1].counter === 0 &&
+      buttonInfo[2].counter === 0 ? (
+        <p>No feedback given</p>
+      ) : (
+        <div>
+          {buttonInfo?.map((button, index) => (
+            <Statistics
+              key={index}
+              text={button.name}
+              counter={button.counter}
+            />
+          ))}
+          <Score comments={buttonInfo} />
+        </div>
+      )}
     </div>
   );
 };
