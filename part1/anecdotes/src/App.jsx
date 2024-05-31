@@ -1,5 +1,27 @@
 import { useState } from "react";
 
+const PointsSystem = ({ points, selected, updatePoints }) => {
+  const handleVote = () => {
+    updatePoints((prevPoints) => {
+      const copy = { ...prevPoints };
+
+      if (copy[selected]) {
+        copy[selected]++;
+      } else {
+        copy[selected] = 1;
+      }
+      return copy;
+    });
+  };
+
+  return (
+    <>
+      <p>Has {points[selected] || 0} votes </p>
+      <button onClick={() => handleVote()}>vote</button>
+    </>
+  );
+};
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -11,14 +33,29 @@ const App = () => {
     "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.",
     "The only way to go fast, is to go well.",
   ];
+  const [points, setPoints] = useState({});
 
-  const [selected, setSelected] = useState(0);
-  const randomNumber = Math.floor(Math.random() * anecdotes.length);
+  const [selected, setSelected] = useState(
+    Math.floor(Math.random() * anecdotes.length)
+  );
+
+  const handleNextAnecdote = () => {
+    const randomNumber = Math.floor(Math.random() * anecdotes.length);
+    setSelected(randomNumber);
+  };
+
   return (
-    <div>
-      <p>{anecdotes[selected]}</p>
-      <button onClick={() => setSelected(randomNumber)}>next anecdote</button>
-    </div>
+    <>
+      <div>
+        <p>{anecdotes[selected]}</p>
+        <PointsSystem
+          points={points}
+          selected={selected}
+          updatePoints={setPoints}
+        />
+        <button onClick={handleNextAnecdote}>next anecdote</button>
+      </div>
+    </>
   );
 };
 
