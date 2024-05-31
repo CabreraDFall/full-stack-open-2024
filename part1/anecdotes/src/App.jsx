@@ -22,6 +22,37 @@ const PointsSystem = ({ points, selected, updatePoints }) => {
   );
 };
 
+const HighScore = ({ points, anecdotes }) => {
+  const isEmpty = Object.values(points).length;
+
+  const highestNote = (points) => {
+    return Object.entries(points).reduce(
+      (highest, current) => {
+        const [currentKey, currentValue] = current;
+        const [highestKey, highestValue] = highest;
+        return currentValue > highestValue ? current : highest;
+      },
+      ["", -Infinity]
+    );
+  };
+
+  const [highestKey, highestValue] = highestNote(points);
+
+  return (
+    <div>
+      <h2>Anecdote with most votes</h2>
+      {isEmpty === 0 ? (
+        <p>There is no votes yet. Be the first.</p>
+      ) : (
+        <div>
+          <p>{anecdotes[highestKey]} </p>
+          <p>has {highestValue} votes</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -47,6 +78,7 @@ const App = () => {
   return (
     <>
       <div>
+        <h2>Anecdote of the day</h2>
         <p>{anecdotes[selected]}</p>
         <PointsSystem
           points={points}
@@ -55,6 +87,8 @@ const App = () => {
         />
         <button onClick={handleNextAnecdote}>next anecdote</button>
       </div>
+
+      <HighScore points={points} anecdotes={anecdotes} />
     </>
   );
 };
