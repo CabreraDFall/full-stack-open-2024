@@ -6,9 +6,11 @@ const Button = ({ text, counter }) => {
 
 const Statistics = ({ text, counter }) => {
   return (
-    <p>
-      {text} {counter}
-    </p>
+    <tr>
+      <td>
+        {text} {counter}
+      </td>
+    </tr>
   );
 };
 
@@ -18,9 +20,15 @@ const Score = ({ comments }) => {
   const positiveComment = (comments[0].counter / sumScore) * 100;
   return (
     <>
-      <p>all {sumScore}</p>
-      <p>average {average}</p>
-      <p>positive {positiveComment} %</p>
+      <tr>
+        <td>all {sumScore}</td>
+      </tr>
+      <tr>
+        <td>average {average}</td>
+      </tr>
+      <tr>
+        <td>positive {positiveComment} %</td>
+      </tr>
     </>
   );
 };
@@ -55,16 +63,18 @@ const App = () => {
       buttonInfo[2].counter === 0 ? (
         <p>No feedback given</p>
       ) : (
-        <div>
-          {buttonInfo?.map((button, index) => (
-            <Statistics
-              key={index}
-              text={button.name}
-              counter={button.counter}
-            />
-          ))}
-          <Score comments={buttonInfo} />
-        </div>
+        <table>
+          <tbody>
+            {buttonInfo?.map((button, index) => (
+              <Statistics
+                key={index}
+                text={button.name}
+                counter={button.counter}
+              />
+            ))}
+            <Score comments={buttonInfo} />
+          </tbody>
+        </table>
       )}
     </div>
   );
