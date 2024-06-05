@@ -3,6 +3,7 @@ const Course = ({ course }) => {
     <div>
       <Header name={course.name} />
       <Content parts={course.parts} />
+      <Total quantity={course.parts} />
     </div>
   );
 };
@@ -26,6 +27,14 @@ const Part = ({ parts }) => {
   return <div>{liList}</div>;
 };
 
+const Total = ({ quantity }) => {
+  const sumQuantity = quantity.reduce((acc, x) => {
+    return acc + x.exercises;
+  }, 0);
+
+  return <p>total of {sumQuantity} exercise</p>;
+};
+
 const App = () => {
   const course = {
     id: 1,
@@ -45,6 +54,11 @@ const App = () => {
         name: "State of a component",
         exercises: 14,
         id: 3,
+      },
+      {
+        name: "Redux",
+        exercises: 11,
+        id: 4,
       },
     ],
   };
