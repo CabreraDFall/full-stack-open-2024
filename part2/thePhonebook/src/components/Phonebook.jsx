@@ -9,13 +9,24 @@ const Phonebook = () => {
     setNewName(event.target.value);
   };
 
+  const confirmNewName = (newName) => {
+    return persons.some((person) => {
+      return person.name === newName;
+    });
+  };
+
   const addNewname = (event) => {
-    const perosonObject = {
-      name: newName,
-      id: persons.length + 1,
-    };
     event.preventDefault();
-    setPersons([...persons, perosonObject]);
+    if (!confirmNewName(newName)) {
+      const perosonObject = {
+        name: newName,
+        id: persons.length + 1,
+      };
+      setPersons([...persons, perosonObject]);
+      setNewName("");
+    } else {
+      alert(`${newName} is already added to phonebook`);
+    }
   };
 
   return (

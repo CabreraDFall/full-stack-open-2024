@@ -1,5 +1,4 @@
 const PersonList = ({ users }) => {
-  console.log(users);
   return (
     <div>
       <h2>Numbers</h2>
