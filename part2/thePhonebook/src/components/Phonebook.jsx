@@ -39,7 +39,7 @@ const Phonebook = () => {
       const perosonObject = {
         name: newName,
         number: newNumber,
-        id: persons.length + 1,
+        id: `${Date.now()}-${Math.floor(Math.random() * 1000)}`,
       };
       setPersons([...persons, perosonObject]);
       setNewName("");
@@ -52,6 +52,19 @@ const Phonebook = () => {
     } else {
       alert(`${newName} is already added to phonebook`);
     }
+  };
+
+  const deleteObject = (id) => {
+    const personToDelete = persons.find((person) => person.id === id);
+
+    noteService
+      .deleteUser(id, personToDelete)
+      .then(() => {
+        setPersons(persons.filter((person) => person.id !== id));
+      })
+      .catch((error) => {
+        console.error("Failed to delete the person:", error);
+      });
   };
 
   // To show
@@ -76,7 +89,7 @@ const Phonebook = () => {
         newNumber={newNumber}
         handleNewNumber={handleNewNumber}
       />
-      <PersonList users={personToShown} />
+      <PersonList users={personToShown} deleteObject={deleteObject} />
     </div>
   );
 };
