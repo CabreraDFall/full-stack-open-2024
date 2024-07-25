@@ -50,7 +50,30 @@ const Phonebook = () => {
         setNewName("");
       });
     } else {
-      alert(`${newName} is already added to phonebook`);
+      const personToUpdate = persons.find((person) => person.name === newName);
+
+      const confirmUpdate = window.confirm(
+        `${newName} is already added to the phonebook, replace the old number with a new one?`
+      );
+
+      if (confirmUpdate) {
+        const updatedPerson = { ...personToUpdate, number: newNumber };
+
+        noteService
+          .update(personToUpdate.id, updatedPerson)
+          .then((response) => {
+            setPersons(
+              persons.map((person) =>
+                person.id !== personToUpdate.id ? person : response
+              )
+            );
+            setNewName("");
+            setNewNumber("");
+          })
+          .catch((error) => {
+            console.error("Error updating number", error);
+          });
+      }
     }
   };
 
